@@ -12,9 +12,10 @@ interface SidebarProps {
   currentView: ViewType;
   onViewChange: (view: ViewType) => void;
   glassesRemaining: number;
+  isAnimating?: boolean;
 }
 
-export default function Sidebar({ currentView, onViewChange, glassesRemaining }: SidebarProps) {
+export default function Sidebar({ currentView, onViewChange, glassesRemaining, isAnimating }: SidebarProps) {
   const navItems = [
     { id: 'home', label: 'Home', icon: Home },
     { id: 'drinks', label: 'Drinks', icon: Coffee },
@@ -26,13 +27,21 @@ export default function Sidebar({ currentView, onViewChange, glassesRemaining }:
   return (
     <nav className="hidden md:flex flex-col py-8 z-50 bg-surface-container-low shadow-[20px_0px_40px_rgba(214,207,255,0.08)] fixed left-0 top-0 h-full w-64 rounded-r-3xl">
       <div className="px-6 mb-12 flex flex-col items-center text-center">
-        <div className="w-24 h-24 rounded-full bg-primary-container overflow-hidden mb-4 shadow-[10px_10px_30px_rgba(214,207,255,0.2)]">
+        <motion.div 
+          animate={isAnimating ? {
+            y: [0, -20, 0],
+            scale: [1, 1.1, 1],
+            rotate: [0, 5, -5, 0]
+          } : {}}
+          transition={{ duration: 0.5, repeat: isAnimating ? Infinity : 0 }}
+          className="w-24 h-24 rounded-full bg-primary-container overflow-hidden mb-4 shadow-[10px_10px_30px_rgba(214,207,255,0.2)]"
+        >
           <img 
             alt="Water droplet character" 
             className="w-full h-full object-cover" 
             src={MASCOTS.WATER_DROP} 
           />
-        </div>
+        </motion.div>
         <h1 className="text-2xl font-bold text-primary mb-1">Stay Hydrated!</h1>
         <p className="text-sm text-on-surface-variant font-medium">
           {glassesRemaining} glasses to go

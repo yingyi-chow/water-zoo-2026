@@ -75,8 +75,15 @@ export const BADGES: Badge[] = [
 
 export const DRINK_OPTIONS = [
   { name: 'Water', description: 'Pure & Simple', amount: 250, icon: 'Water', color: 'primary-container' },
-  { name: 'Coffee', description: 'Energy Boost', amount: 200, icon: 'Coffee', color: 'tertiary-container' },
-  { name: 'Tea', description: 'Calm & Cozy', amount: 200, icon: 'Soup', color: 'secondary-container' },
-  { name: 'Juice', description: 'Sweet & Fruity', amount: 300, icon: 'CupSoda', color: 'surface-container' },
-  { name: 'Smoothie', description: 'Thick & Nutritious', amount: 400, icon: 'GlassWater', color: 'primary-fixed' },
+  { name: 'Milk', description: 'Strong Bones', amount: 200, icon: 'Baby', color: 'tertiary-container' },
+  { name: 'Fruit Juice', description: 'Sweet & Fruity', amount: 200, icon: 'Citrus', color: 'secondary-container' },
+  { name: 'Fruit Water', description: 'Yummy Berry', amount: 250, icon: 'Apple', color: 'surface-container' },
+  { name: 'Smoothie', description: 'Thick & Nutritious', amount: 300, icon: 'GlassWater', color: 'primary-fixed' },
+];
+
+export const AGE_BANDS = [
+  { id: '1-3', label: '1-3 years', description: 'approx 960ml, 4 cups', target: 960 },
+  { id: '4-8', label: '4-8 years', description: 'approx 1200ml, 5 cups', target: 1200 },
+  { id: '9-13', label: '9-13 years', description: 'approx 1600-2000ml, 6-8 cups', target: 1800 },
+  { id: '14-18', label: '14-18 years', description: 'approx 1.9-2.6l, 8-11 cups', target: 2250 },
 ];
