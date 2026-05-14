@@ -5,6 +5,7 @@
 
 import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, Trophy } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 
 interface VictoryCelebrationProps {
   isVisible: boolean;
@@ -12,7 +13,28 @@ interface VictoryCelebrationProps {
   characterImage: string;
 }
 
+const VICTORY_SOUND_URL = 'https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2064.mp3';
+
 export default function VictoryCelebration({ isVisible, onClose, characterImage }: VictoryCelebrationProps) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (isVisible) {
+      if (!audioRef.current) {
+        audioRef.current = new Audio(VICTORY_SOUND_URL);
+      }
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch(err => {
+        console.warn('Audio playback failed (usually requires user interaction):', err);
+      });
+    } else {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    }
+  }, [isVisible]);
+
   // Firework particles
   const particles = Array.from({ length: 20 });
 

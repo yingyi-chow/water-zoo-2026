@@ -42,7 +42,7 @@ export default function Sidebar({ currentView, onViewChange, glassesRemaining, i
             src={MASCOTS.WATER_DROP} 
           />
         </motion.div>
-        <h1 className="text-2xl font-bold text-primary mb-1">Stay Hydrated!</h1>
+        <h1 className="text-2xl font-bold text-primary mb-1">Thirsty Creatures</h1>
         <p className="text-sm text-on-surface-variant font-medium">
           {glassesRemaining} glasses to go
         </p>

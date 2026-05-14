@@ -9,7 +9,7 @@ export default function TopNav() {
   return (
     <header className="w-full h-20 bg-background flex justify-between items-center px-6 md:px-12 sticky top-0 z-40 backdrop-blur-md bg-white/70">
       <div className="text-3xl font-bold text-primary tracking-tight md:hidden">
-        AquaPals
+        Thirsty Creatures
       </div>
       <div className="hidden md:flex gap-6">
         <a href="#" className="text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors">Help</a>
