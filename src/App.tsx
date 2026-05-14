@@ -24,14 +24,13 @@ export default function App() {
   const [currentIntake, setCurrentIntake] = useState(1200);
   const [goal, setGoal] = useState(2000);
   const [streak, setStreak] = useState(5);
-  
   const [recentLogs, setRecentLogs] = useState<DrinkRecord[]>([
     {
       id: '1',
       name: 'Water Glass',
       amount: 250,
       icon: 'Water',
-      timestamp: new Date(Date.now() - 2 * 60000), // 2 mins ago
+      timestamp: new Date(Date.now() - 2 * 60000),
       type: 'Water'
     },
     {
@@ -39,27 +38,40 @@ export default function App() {
       name: 'Morning Coffee',
       amount: 200,
       icon: 'Coffee',
-      timestamp: new Date(Date.now() - 3 * 3600000), // 3 hours ago
-      type: 'Coffee'
+      timestamp: new Date(Date.now() - 3 * 3600000),
+      type: 'Other'
     },
     {
       id: '3',
       name: 'Sports Bottle',
       amount: 500,
       icon: 'Water',
-      timestamp: new Date(Date.now() - 5 * 3600000), // 5 hours ago
+      timestamp: new Date(Date.now() - 5 * 3600000),
       type: 'Water'
     }
   ]);
+  
+  const addDrink = (name: string, amount: number, type: string) => {
+    const newLog: DrinkRecord = {
+      id: Math.random().toString(36).substr(2, 9),
+      name,
+      amount,
+      icon: type === 'Water' ? 'Water' : 'Coffee',
+      timestamp: new Date(),
+      type
+    };
+    setRecentLogs(prev => [newLog, ...prev].slice(0, 10)); // Keep last 10 logs
+    setCurrentIntake(prev => prev + amount);
+  };
 
   const glassesRemaining = Math.max(0, Math.ceil((goal - currentIntake) / 250));
 
   const renderView = () => {
     switch (currentView) {
       case 'home':
-        return <Dashboard currentIntake={currentIntake} goal={goal} streak={streak} recentLogs={recentLogs} />;
+        return <Dashboard currentIntake={currentIntake} goal={goal} streak={streak} recentLogs={recentLogs} onAddDrink={addDrink} />;
       case 'drinks':
-        return <Drinks />;
+        return <Drinks onAddDrink={addDrink} />;
       case 'characters':
         return <Characters />;
       case 'stats':
@@ -73,7 +85,7 @@ export default function App() {
           </div>
         );
       default:
-        return <Dashboard currentIntake={currentIntake} goal={goal} streak={streak} recentLogs={recentLogs} />;
+        return <Dashboard currentIntake={currentIntake} goal={goal} streak={streak} recentLogs={recentLogs} onAddDrink={addDrink} />;
     }
   };
 

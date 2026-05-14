@@ -23,7 +23,11 @@ const COLOR_MAP: Record<string, string> = {
   'primary-fixed': 'bg-primary-fixed',
 };
 
-export default function Drinks() {
+interface DrinksProps {
+  onAddDrink: (name: string, amount: number, type: string) => void;
+}
+
+export default function Drinks({ onAddDrink }: DrinksProps) {
   return (
     <div className="space-y-12">
       <div className="max-w-2xl">
@@ -37,10 +41,14 @@ export default function Drinks() {
         {DRINK_OPTIONS.map((drink, idx) => {
           const Icon = ICON_MAP[drink.icon] || Droplets;
           const bgClass = COLOR_MAP[drink.color] || 'bg-primary-container';
+          // Determine type based on icon/name
+          const type = drink.name === 'Water' ? 'Water' : (drink.name === 'Juice' ? 'Juice' : 'Other');
+          
           return (
             <motion.div
               key={idx}
               whileHover={{ y: -8, scale: 1.02 }}
+              onClick={() => onAddDrink(drink.name, drink.amount, type)}
               className={`${bgClass} relative rounded-[2rem] p-8 flex flex-col items-center justify-center text-center aspect-square shadow-cloud cursor-pointer overflow-hidden border-2 border-white/40 group`}
             >
               <div className="w-20 h-20 mb-4 flex items-center justify-center bg-white/30 rounded-full text-current transition-transform group-hover:scale-110">

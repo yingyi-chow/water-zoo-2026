@@ -13,9 +13,10 @@ interface DashboardProps {
   goal: number;
   streak: number;
   recentLogs: DrinkRecord[];
+  onAddDrink: (name: string, amount: number, type: string) => void;
 }
 
-export default function Dashboard({ currentIntake, goal, streak, recentLogs }: DashboardProps) {
+export default function Dashboard({ currentIntake, goal, streak, recentLogs, onAddDrink }: DashboardProps) {
   return (
     <div className="space-y-12">
       {/* Bento Layout */}
@@ -40,16 +41,18 @@ export default function Dashboard({ currentIntake, goal, streak, recentLogs }: D
             <h3 className="text-xl font-bold text-on-surface mb-6">Quick Log</h3>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { label: '250ml Glass', icon: Droplet, amount: 250, color: 'text-primary' },
-                { label: 'Coffee', icon: Coffee, amount: 200, color: 'text-secondary' },
-                { label: '500ml Bottle', icon: Beer, amount: 500, color: 'text-primary' },
-                { label: 'Tea', icon: Coffee, amount: 200, color: 'text-tertiary' },
+                { label: '250ml Glass', icon: Droplet, amount: 250, color: 'text-primary', type: 'Water' },
+                { label: 'Coffee', icon: Coffee, amount: 200, color: 'text-secondary', type: 'Coffee' },
+                { label: '500ml Bottle', icon: Beer, amount: 500, color: 'text-primary', type: 'Water' },
+                { label: 'Tea', icon: Coffee, amount: 200, color: 'text-tertiary', type: 'Coffee' },
               ].map((item, idx) => {
                 const Icon = item.icon;
                 return (
                   <motion.button 
                     key={idx}
                     whileHover={{ y: -4 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => onAddDrink(item.label, item.amount, item.type)}
                     className="bg-surface-container-lowest hover:bg-primary-container/30 rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm transition-all"
                   >
                     <Icon size={32} className={item.color} />
