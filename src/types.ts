@@ -18,6 +18,7 @@ export interface Character {
   image: string;
   isUnlocked: boolean;
   unlockCondition?: string;
+  color: string;
 }
 
 export interface Badge {

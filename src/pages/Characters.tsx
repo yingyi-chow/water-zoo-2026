@@ -23,7 +23,7 @@ export default function Characters() {
             key={char.id}
             whileHover={{ y: -8 }}
             className={`rounded-[3rem] p-10 flex flex-col items-center relative overflow-hidden shadow-cloud border border-white/40 transition-all group ${
-              char.isUnlocked ? 'bg-secondary-fixed' : 'bg-tertiary-container opacity-80 backdrop-blur-[2px]'
+              char.isUnlocked ? char.color : 'bg-tertiary-container opacity-80 backdrop-blur-[2px]'
             }`}
           >
             {/* Status Chip */}
@@ -32,7 +32,7 @@ export default function Characters() {
                 <Stars size={14} className="fill-current" /> Level {char.level}
               </div>
             ) : (
-              <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-tertiary-container/30 backdrop-blur-[2px] rounded-[3rem]">
+              <div className={`absolute inset-0 z-10 flex flex-col items-center justify-center ${char.color}/30 backdrop-blur-[2px] rounded-[3rem]`}>
                 <div className="w-20 h-20 bg-surface rounded-full flex items-center justify-center shadow-lg text-tertiary mb-4">
                   <Lock size={32} />
                 </div>
@@ -44,7 +44,7 @@ export default function Characters() {
 
             {/* Circular Frame */}
             <div className={`w-48 h-48 rounded-full bg-surface-container-lowest p-1 shadow-cloud mb-8 group-hover:scale-105 transition-transform duration-700 ${!char.isUnlocked && 'blur-[2px] grayscale-[0.5]'}`}>
-              <div className={`w-full h-full rounded-full overflow-hidden border-4 ${char.isUnlocked ? 'border-secondary-fixed' : 'border-tertiary-container'}`}>
+              <div className={`w-full h-full rounded-full overflow-hidden border-4 ${char.isUnlocked ? (char.color.replace('bg-', 'border-')) : 'border-tertiary-container'}`}>
                 <img 
                   alt={char.name} 
                   className="w-full h-full object-cover" 
