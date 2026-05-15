@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Home, Coffee, Users, BarChart3, Settings, Droplets } from 'lucide-react';
+import { Home, Coffee, Users, BarChart3, Settings, Droplets, Trophy } from 'lucide-react';
 import { ViewType } from '../types';
 import { MASCOTS } from '../constants';
 import { motion } from 'motion/react';
@@ -21,6 +21,7 @@ export default function Sidebar({ currentView, onViewChange, glassesRemaining, i
     { id: 'drinks', label: 'Drinks', icon: Coffee },
     { id: 'characters', label: 'Characters', icon: Users },
     { id: 'stats', label: 'Stats', icon: BarChart3 },
+    { id: 'leaderboard', label: 'Leaderboard', icon: Trophy },
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
 

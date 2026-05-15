@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard';
 import Drinks from './pages/Drinks';
 import Characters from './pages/Characters';
 import Stats from './pages/Stats';
+import Leaderboard from './pages/Leaderboard';
 import DisqusForum from './components/DisqusForum';
 import VictoryCelebration from './components/VictoryCelebration';
 import { motion, AnimatePresence } from 'motion/react';
@@ -23,7 +24,8 @@ export default function App() {
   const [currentIntake, setCurrentIntake] = useState(1200);
   const [selectedAgeBandId, setSelectedAgeBandId] = useState(AGE_BANDS[2].id); // Default to 9-13
   const [goal, setGoal] = useState(AGE_BANDS[2].target);
-  const [streak, setStreak] = useState(5);
+  const [streak, setStreak] = useState(7);
+  const [points, setPoints] = useState(4280);
   const [isAnimating, setIsAnimating] = useState(false);
   const [recentLogs, setRecentLogs] = useState<DrinkRecord[]>([
     {
@@ -72,6 +74,19 @@ export default function App() {
 
     setRecentLogs(prev => [newLog, ...prev].slice(0, 10)); // Keep last 10 logs
     
+    // Streak-based point reward
+    // Base: 10 points per drink
+    // Streak multiplier: 1 + (streak * 0.2)
+    const multiplier = 1 + (streak * 0.2);
+    let earnedPoints = Math.round(10 * multiplier);
+    
+    // Daily Goal Bonus: 100 points scaled by streak
+    if (currentIntake < goal && newIntake >= goal) {
+      const bonus = Math.round(100 * multiplier);
+      earnedPoints += bonus;
+    }
+    
+    setPoints(prev => prev + earnedPoints);
     setCurrentIntake(newIntake);
     
     // Trigger standard animation
@@ -89,6 +104,7 @@ export default function App() {
             currentIntake={currentIntake} 
             goal={goal} 
             streak={streak} 
+            points={points}
             recentLogs={recentLogs} 
             onAddDrink={addDrink} 
             isAnimating={isAnimating}
@@ -99,7 +115,9 @@ export default function App() {
       case 'characters':
         return <Characters />;
       case 'stats':
-        return <Stats />;
+        return <Stats streak={streak} points={points} />;
+      case 'leaderboard':
+        return <Leaderboard streak={streak} points={points} setPoints={setPoints} />;
       case 'settings':
         return (
           <div className="flex flex-col gap-12 bg-surface-container-lowest rounded-[3rem] shadow-cloud p-8 md:p-12">
@@ -164,6 +182,7 @@ export default function App() {
             currentIntake={currentIntake} 
             goal={goal} 
             streak={streak} 
+            points={points}
             recentLogs={recentLogs} 
             onAddDrink={addDrink} 
             isAnimating={isAnimating}

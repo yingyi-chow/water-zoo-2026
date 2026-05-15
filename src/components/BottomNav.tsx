@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Home, Coffee, Users, BarChart3, Plus } from 'lucide-react';
+import { Home, Coffee, Users, BarChart3, Plus, Trophy } from 'lucide-react';
 import { ViewType } from '../types';
 
 interface BottomNavProps {
@@ -12,16 +12,19 @@ interface BottomNavProps {
 }
 
 export default function BottomNav({ currentView, onViewChange }: BottomNavProps) {
-  const navItems = [
+  const navItemsLeft = [
     { id: 'home', label: 'Home', icon: Home },
-    { id: 'drinks', label: 'Drinks', icon: Coffee },
-    { id: 'characters', label: 'Pals', icon: Users },
+    { id: 'characters', label: 'Zoo', icon: Users },
+  ];
+
+  const navItemsRight = [
     { id: 'stats', label: 'Stats', icon: BarChart3 },
+    { id: 'leaderboard', label: 'Friends', icon: Trophy },
   ];
 
   return (
     <nav className="md:hidden fixed bottom-0 w-full bg-surface-container-lowest shadow-[0px_-10px_20px_rgba(214,207,255,0.1)] flex justify-around items-center h-20 z-50 px-2 rounded-t-3xl border-t border-surface-variant/30">
-      {navItems.slice(0, 2).map((item) => {
+      {navItemsLeft.map((item) => {
         const isActive = currentView === item.id;
         const Icon = item.icon;
         return (
@@ -49,7 +52,7 @@ export default function BottomNav({ currentView, onViewChange }: BottomNavProps)
         </button>
       </div>
 
-      {navItems.slice(2).map((item) => {
+      {navItemsRight.map((item) => {
         const isActive = currentView === item.id;
         const Icon = item.icon;
         return (

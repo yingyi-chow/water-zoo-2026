@@ -1,4 +1,4 @@
-export type ViewType = 'home' | 'drinks' | 'characters' | 'stats' | 'settings';
+export type ViewType = 'home' | 'drinks' | 'characters' | 'stats' | 'leaderboard' | 'settings';
 
 export interface DrinkRecord {
   id: string;

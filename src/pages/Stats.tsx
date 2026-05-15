@@ -21,7 +21,12 @@ const BADGE_COLOR_MAP: Record<string, string> = {
   'surface-container-high': 'bg-surface-container-high',
 };
 
-export default function Stats() {
+interface StatsProps {
+  streak?: number;
+  points?: number;
+}
+
+export default function Stats({ streak = 14, points = 4280 }: StatsProps) {
   const weeklyData = [
     { day: 'Mon', level: 60, amount: '1.8L' },
     { day: 'Tue', level: 80, amount: '2.4L' },
@@ -85,7 +90,7 @@ export default function Stats() {
             <Flame size={56} className="text-tertiary fill-current" />
           </div>
           <div className="z-10">
-            <h3 className="text-5xl font-bold text-on-tertiary-container">14 Days</h3>
+            <h3 className="text-5xl font-bold text-on-tertiary-container">{streak} Days</h3>
             <p className="text-xl font-medium text-on-tertiary-container mt-2">Current Streak</p>
           </div>
           <div className="bg-surface-container-lowest/60 backdrop-blur-sm px-6 py-2.5 rounded-full text-xs font-bold text-on-tertiary-container mt-4 flex items-center gap-2 z-10 shadow-sm">

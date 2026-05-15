@@ -23,12 +23,13 @@ interface DashboardProps {
   currentIntake: number;
   goal: number;
   streak: number;
+  points: number;
   recentLogs: DrinkRecord[];
   onAddDrink: (name: string, amount: number, type: string, icon: string) => void;
   isAnimating?: boolean;
 }
 
-export default function Dashboard({ currentIntake, goal, streak, recentLogs, onAddDrink, isAnimating }: DashboardProps) {
+export default function Dashboard({ currentIntake, goal, streak, points, recentLogs, onAddDrink, isAnimating }: DashboardProps) {
   const [showCelebration, setShowCelebration] = useState(false);
   
   // Trigger celebration when goal is reached during animation
