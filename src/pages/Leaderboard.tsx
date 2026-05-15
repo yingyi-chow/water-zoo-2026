@@ -21,6 +21,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { useState } from 'react';
+import { MASCOTS } from '../constants';
 
 interface LeaderboardProps {
   streak: number;
@@ -38,7 +39,7 @@ export default function Leaderboard({ streak: currentStreak, points, setPoints }
       name: 'Hungry Hippo',
       streak: 12,
       points: 8450,
-      image: 'https://lh3.googleusercontent.com/aida/ADBb0ujsAmHnhXYV-hJ1ayfePK20_eGJPqxFXG1RMUO6V_i-IZeRLovVarLvxs_gO3r2PcWmz7sxNZh0XLGz_ejp5Rfu1Q-XYWd9SYTjJnObuuvd9Ry6fw7RcqpftOJgo3NteZ_EwF5Yf7KPz7IiW4Ir9c5aaE2Y6y7zRPtJM7rXKjMBA6PG8A1Llpz7TiJ7abjnxD-lo16n6dKrKj7cC8IFlMO5hJzYZIF5jGqcGSifNLOkaiRwISYMreXCI6_o',
+      image: MASCOTS.HIPPO,
       badges: ['Award', 'Crown']
     },
     {
@@ -46,7 +47,7 @@ export default function Leaderboard({ streak: currentStreak, points, setPoints }
       name: 'Ellie Trunk',
       streak: 8,
       points: 7120,
-      image: 'https://lh3.googleusercontent.com/aida/ADBb0uh9B6ra_JbOmmrwJRiPhWfwfw9VXZVqRJFWZ8vup3NgR8tX8cXp24WS-dftYAN4zGh1wprZ_R3ho0IJRchbrZwVcQvnwQ1YWIplhejrSGsiaX_AyouWG5Lg8g0C0GxLz6m48k5ZB7LQ9gXPe6OZBSbTTwNkQJo1SIaPYu1L7is-Y_Vof8-ia6zQOWhF2D-jLKC9XTLZNNJoT1kaUNe0WdsR2nFw_BnHUHMaIRO1iHhdkc6-VwGJlPiXHE',
+      image: MASCOTS.ELEPHANT,
       badges: ['Award']
     }
   ];
@@ -157,7 +158,7 @@ export default function Leaderboard({ streak: currentStreak, points, setPoints }
           <section className="bg-tertiary-container/40 p-8 rounded-[2.5rem] shadow-cloud relative overflow-hidden border border-tertiary/10">
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
-                <Star className="text-tertiary fill-current" size={24} />
+                <span className="material-symbols-outlined text-tertiary" style={{ fontVariationSettings: "'FILL' 1" }}>stars</span>
                 <h2 className="text-xl font-bold text-on-tertiary-container">Daily Race</h2>
               </div>
               <p className="text-on-tertiary-container/80 mb-6 leading-relaxed">
